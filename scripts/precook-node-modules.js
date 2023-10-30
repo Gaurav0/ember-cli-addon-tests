@@ -25,7 +25,9 @@ fs.ensureDir('tmp')
     let precooked = path.join(root, 'tmp', 'precooked_node_modules', 'node_modules');
     fs.mkdirSync(path.dirname(precooked));
     moveDirectory(path.join(tmpDir, appName, 'node_modules'), precooked);
-    symlinkDirectory(root, path.join(precooked, name));
+    let fileName = path.join(precooked, name);
+    fs.ensureDirSync(path.dirname(fileName));
+    symlinkDirectory(root, path.join(fileName));
   })
   .catch((e) => {
     console.log(e); // eslint-disable-line no-console
